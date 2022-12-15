@@ -1,0 +1,29 @@
+.login{
+  min-width: 300px;
+  width: 400px;
+  border: 1px solid #1e1e1e;
+  border-radius: 5px;
+  margin: 20vh auto;
+
+  &__header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 20px;
+  }
+  &__body{
+    margin: 20px;
+  }
+  &__text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  &__button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
