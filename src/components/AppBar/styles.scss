@@ -9,3 +9,21 @@
   font-size: 25px;
   font-weight: 700;
 }
+
+.menu {
+  display: flex;
+  align-items: center;
+  &__item {
+    margin-right: 10px;
+  }
+
+  &__button_logout {
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

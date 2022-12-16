@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import './styles.scss';
-import { useStores } from '../../store/use-stores'
+// import { useStores } from '../../store/use-stores'
 import { GoogleLogin } from '@react-oauth/google';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx'
 import { useCookies } from 'react-cookie';
+import userStore from '../../store/User';
 
 const Login: FC = observer(() => {
-	const { userStore } = useStores();
+	// const { userStore } = useStores();
 
 	const onSuccess = async (credentialResponse: any) => {
 		const user = await userStore.login({ token: credentialResponse.credential })

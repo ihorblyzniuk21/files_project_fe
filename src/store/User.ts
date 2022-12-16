@@ -1,5 +1,5 @@
-import { makeAutoObservable } from "mobx";
-import { api } from "../api/api";
+import { makeAutoObservable } from 'mobx';
+import { api } from '../api/api';
 
 export interface IUser {
 	id: number,
@@ -8,34 +8,35 @@ export interface IUser {
 	avatar: string
 }
 
-export class User {
-	public user: IUser | any = {};
+class User {
+	public user: IUser | null = null;
 	public error: any = null
 
 	constructor() {
-		makeAutoObservable(this)
+		makeAutoObservable(this);
 	}
 
-	async login(token: {}) {
-		try {
-			const user = await api.login(token)
-			localStorage.setItem('accessToken', user.tokens.accessToken)
-			this.user = user;
-			return this.user;
-		} catch (e) {
-			console.log(e)
-			this.error = e
-			return this.user = null;
-		}
+	login = async (token: {}) => {
+			try {
+				const res = await api.login(token)
+				localStorage.setItem('accessToken', res.tokens.accessToken)
+				this.user = res.user;
+				return this.user;
+			} catch (e) {
+				console.log(e)
+				this.error = e
+				return this.user = null;
+			}
 	}
 
-	async logout() {
-		this.user = {};
+	logout = async () => {
 		localStorage.removeItem('accessToken')
-		return await api.logout()
+		await api.logout()
+		this.user = null;
+		console.log(this.user)
 	}
 
-	async refreshUser() {
+	refreshUser = async () => {
 		const res = await api.refresh()
 		if (res.tokens) {
 			localStorage.setItem('accessToken', res.tokens.accessToken)
@@ -49,4 +50,75 @@ export class User {
 			return this.user = null;
 		}
 	}
+
+
 }
+
+const userStore = new User();
+
+export default userStore;
+
+
+
+
+// import { makeAutoObservable } from "mobx";
+// import { api } from "../api/api";
+//
+// export interface IUser {
+// 	id: number,
+// 	name: string,
+// 	email: string,
+// 	avatar: string
+// }
+//
+// export class User {
+// 	public user: IUser | null = null;
+// 	public error: any = null
+// 	public num: number = 0
+//
+// 	constructor() {
+// 		makeAutoObservable(this)
+// 	}
+//
+// 	increment() {
+// 		return this.num = this.num++
+// 	}
+//
+// 	decrement() {
+// 		return this.num = this.num--
+// 	}
+//
+// 	async login(token: {}) {
+// 		try {
+// 			const res = await api.login(token)
+// 			localStorage.setItem('accessToken', res.tokens.accessToken)
+// 			this.user = res.user;
+// 			return this.user;
+// 		} catch (e) {
+// 			console.log(e)
+// 			this.error = e
+// 			return this.user = null;
+// 		}
+// 	}
+//
+// 	async logout() {
+// 		localStorage.removeItem('accessToken')
+// 		await api.logout()
+// 		return this.user = null;
+// 	}
+//
+// 	async refreshUser() {
+// 		const res = await api.refresh()
+// 		if (res.tokens) {
+// 			localStorage.setItem('accessToken', res.tokens.accessToken)
+// 		} else {
+// 			localStorage.removeItem('accessToken')
+// 		}
+//
+// 		if (res.user) {
+// 			return this.user = res.user;
+// 		} else {
+// 			return this.user = null;
+// 		}
+// 	}
+// }
