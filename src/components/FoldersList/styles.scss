@@ -1,0 +1,34 @@
+.folders-list{
+  margin: 20px;
+
+  &__title{
+    text-align: center;
+    font-weight: 700;
+  }
+
+  &__list{
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    margin-right: 30px;
+  }
+  &__icon {
+    cursor: pointer;
+  }
+
+  &__header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__button_create {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    cursor: pointer;
+  }
+}
